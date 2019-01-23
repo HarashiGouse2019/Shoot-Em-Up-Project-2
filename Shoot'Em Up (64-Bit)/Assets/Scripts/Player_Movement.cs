@@ -10,14 +10,13 @@ public class Player_Movement : MonoBehaviour
     public float maxSpeed, maxRotationSpeed; //The Max Speed and the Max Speed of Rotation
     public float rateOfSpeed, rateOfRotation; //The amount of speed and rotation speed you gain over time.
 
-    
     private float clockwise; //Reads values 1 and -1; -1 for counter-clockwise, 1 for clockwise rotation
     private float r; //Rotational controls: It will return the value of the controller or keyboard (-1, 0, 1)
-    private int dir; //The scope is global in order to use it as a parameter in a function that handles rotation
     private Rigidbody2D rb; //Giving an identifier (or name) that'll reference our RigidBody!!
 
     void Awake()
     {
+        Vector3 pVector = new Vector3(0.4f, 0.0f, 0.0f);
         rb = GetComponent<Rigidbody2D>(); //Grab the component of the local RigidBody
     }
 
@@ -25,6 +24,9 @@ public class Player_Movement : MonoBehaviour
     {
         r = Input.GetAxisRaw("Horizontal"); //The left, right, A, or D keys
         Rotate(r); //The variable r is used as a parameter for the Rotate function
+
+        if (Input.GetKey(KeyCode.UpArrow))
+            Propel();
     }
 
     float Rotate(float dir)
@@ -46,5 +48,14 @@ public class Player_Movement : MonoBehaviour
         transform.Rotate(dir * (Vector3.forward * Time.deltaTime), rotationSpeed); //We then update the rotation of the GameObject every frame, the rotationSpeed being how fast the rotation is.
 
         return dir; //Retunring the value dir for the Update function.
+    }
+
+    void Propel()
+    {
+        if (Mathf.Abs(speed) < Mathf.Abs(maxSpeed))
+        {
+            rb.velocity = pVector * speed;
+        }
+        
     }
 }
