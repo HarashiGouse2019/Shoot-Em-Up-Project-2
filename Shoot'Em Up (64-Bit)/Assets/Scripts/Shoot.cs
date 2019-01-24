@@ -9,8 +9,16 @@ public class Shoot : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.J)) 
+        if (Input.GetKeyDown(KeyCode.J))
+        {
             Instantiate(bulletPrefab, pointOfFire.position, pointOfFire.rotation); //A bullet will spawn with a set direction based on the player's direction
+            FindObjectOfType<Audio_Manager>().Play("Shoot");
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D hitInfo)
+    {
+        //Collision Code Goes Here!!! xD
     }
 
 }
