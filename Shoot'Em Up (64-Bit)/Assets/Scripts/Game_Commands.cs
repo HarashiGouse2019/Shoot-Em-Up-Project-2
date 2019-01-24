@@ -7,9 +7,11 @@ public class Game_Commands : MonoBehaviour
 {
     private void Update()
     {
-
+        //Simply quits the game when on standalone
         if (Input.GetKey(KeyCode.Space))
             Application.Quit();
+
+        //Restarts the scene (or restarts the game)
         if (Input.GetKey(KeyCode.F1))
             SceneManager.LoadScene("Playing Field", 0);
     }

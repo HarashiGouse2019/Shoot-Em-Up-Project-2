@@ -151,7 +151,6 @@ MonoBehaviour:
   rateOfSpeed: 0.75
   rateOfRotation: 0.25
   enableRevertControl: 0
-  enableInstantVelocity: 0
 --- !u!212 &184456334
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -229,7 +228,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 1
   m_AngularDrag: 1
   m_GravityScale: 0
   m_Material: {fileID: 0}

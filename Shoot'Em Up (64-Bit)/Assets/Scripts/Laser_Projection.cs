@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Laser_Projection : MonoBehaviour
 {
-    public float laser_velocity;
-    public Rigidbody2D rb;
+    public float laser_velocity; //How fast the laser will go
+    public Rigidbody2D rb; //We use this in able to apply physics to our object
     
     // Start is called before the first frame update
     void Start()
