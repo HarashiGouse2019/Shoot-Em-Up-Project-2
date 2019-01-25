@@ -196,9 +196,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   rotationSpeed: 0
-  maxSpeed: 8
-  maxRotationSpeed: 2
-  rateOfSpeed: 0.75
+  maxSpeed: 3
+  maxRotationSpeed: 3
+  rateOfSpeed: 0.5
   rateOfRotation: 0.25
   enableRevertControl: 0
 --- !u!212 &184456334
@@ -278,13 +278,13 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 1
+  m_LinearDrag: 0
   m_AngularDrag: 1
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!114 &184456337
 MonoBehaviour:

@@ -42,7 +42,7 @@ public class Player_Movement : MonoBehaviour
     void FixedUpdate()
     {
         if (Input.GetKey(KeyCode.W)) Throttle();
-        if (Input.GetKey(KeyCode.S)) ReverseThrottle();
+        else if (Input.GetKey(KeyCode.S)) ReverseThrottle();
     }
 
     float Rotate(float dir)
@@ -71,16 +71,16 @@ public class Player_Movement : MonoBehaviour
         {
 
             if (Mathf.Abs(speed) * -1 > Mathf.Abs(maxSpeed) * -1)
-                speed -= rateOfSpeed;
+                speed += rateOfSpeed;
 
 
-            rb.AddForce(speed * (transform.localRotation * new Vector2(-rotationSpeed, 0f)));
+            rb.AddForce(speed * (transform.localRotation * new Vector2(rotationSpeed, 0f)));
 
         }
         else
         {
             if (Mathf.Abs(speed) * -1 < 0)
-                speed += rateOfSpeed * Mathf.Sign(speed);
+                speed -= rateOfSpeed * Mathf.Sign(speed);
         }
     } //Propels the player foward
 
@@ -95,12 +95,12 @@ public class Player_Movement : MonoBehaviour
                 speed += rateOfSpeed;
 
 
-            rb.AddForce(speed * (transform.localRotation * new Vector2(rotationSpeed, 0f)));
+            rb.AddForce(speed * (transform.localRotation * new Vector2(-rotationSpeed, 0f)));
 
         } else
         {
             if (Mathf.Abs(speed) > 0)
-                speed -= rateOfSpeed * Mathf.Sign(speed);
+                speed -= rateOfSpeed * Mathf.Sign(-speed);
         }
     } //Propels the player to the opposite direction
 
