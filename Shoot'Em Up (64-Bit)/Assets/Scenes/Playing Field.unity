@@ -200,7 +200,7 @@ MonoBehaviour:
   maxRotationSpeed: 3
   rateOfSpeed: 0.5
   rateOfRotation: 0.25
-  enableRevertControl: 0
+  enableRevertControl: 1
 --- !u!212 &184456334
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -301,7 +301,7 @@ MonoBehaviour:
   pointOfFire: {fileID: 227835909}
   bulletPrefab: {fileID: 2622396011224767487, guid: b96c715ce87dd79438fca4dc2cbfbc9e,
     type: 3}
-  recoilTime: 4
+  recoilSpeed: 15
   enableAutomaticMode: 1
 --- !u!1 &227835908
 GameObject:

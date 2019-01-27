@@ -7,7 +7,7 @@ public class Shoot : MonoBehaviour
     public Transform pointOfFire; //We assign the gameObject that is the child to our Player GameObject
     public GameObject bulletPrefab; //We assign a Prefab to the slot in order to spawn it when we shoot
 
-    [Range(1f,10f)] public float recoilTime;
+    [Range(1,15)] public int recoilSpeed;
 
     public bool enableAutomaticMode;
 
@@ -16,7 +16,7 @@ public class Shoot : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.J) || isKeyReleased == true)
+        if (Input.GetKeyDown(KeyCode.J) || isKeyReleased == true)
         {
             coroutine = Recoil();
             switch (enableAutomaticMode) {
@@ -34,6 +34,7 @@ public class Shoot : MonoBehaviour
                     break;
             }
         }
+        if (Input.GetKeyUp(KeyCode.J) && enableAutomaticMode == true) StopCoroutine(coroutine);
     }
    
 
@@ -44,7 +45,8 @@ public class Shoot : MonoBehaviour
 
     private IEnumerator Recoil()
     {
-        yield return new WaitForSeconds(recoilTime);
+        float value = (float)recoilSpeed;
+        yield return new WaitForSeconds(1 / value);
         isKeyReleased = true;
     }
 

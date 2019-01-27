@@ -13,9 +13,12 @@ public class Player_Movement : MonoBehaviour
     public float rateOfSpeed, rateOfRotation; //The amount of speed and rotation speed you gain over time.
 
     public bool enableRevertControl = true;
+    
 
     private float clockwise; //Reads values 1 and -1; -1 for counter-clockwise, 1 for clockwise rotation
     private float r; //Rotational controls: It will return the value of the controller or keyboard (-1, 0, 1)
+
+    private bool ThrottleDown, reverseThrottleDown;
 
     private Rigidbody2D rb; //Giving an identifier (or name) that'll reference our RigidBody!!
 
@@ -41,8 +44,16 @@ public class Player_Movement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.W)) Throttle();
-        else if (Input.GetKey(KeyCode.S)) ReverseThrottle();
+        switch (enableRevertControl) {
+            case false:
+                if (Input.GetKey(KeyCode.W)) Throttle();
+                else if (Input.GetKey(KeyCode.S)) ReverseThrottle();
+                break;
+            case true:
+                if (Input.GetKey(KeyCode.W)) ReverseThrottle();
+                else if (Input.GetKey(KeyCode.S)) Throttle();
+                break;
+        }
     }
 
     float Rotate(float dir)
@@ -63,8 +74,15 @@ public class Player_Movement : MonoBehaviour
 
     void Throttle()
     {
-
-        bool ThrottleDown = Input.GetKey(KeyCode.W);
+        switch (enableRevertControl)
+        {
+            case false:
+                ThrottleDown = Input.GetKey(KeyCode.W);
+                break;
+            case true:
+                ThrottleDown = Input.GetKey(KeyCode.S);
+                break;
+        }
 
         //Going backwards
         if (ThrottleDown == true)
@@ -86,7 +104,15 @@ public class Player_Movement : MonoBehaviour
 
     void ReverseThrottle()
     {
-        bool reverseThrottleDown = Input.GetKey(KeyCode.S);
+        switch(enableRevertControl)
+        {
+            case false:
+                reverseThrottleDown = Input.GetKey(KeyCode.S);
+                break;
+            case true:
+                reverseThrottleDown = Input.GetKey(KeyCode.W);
+                break;
+        }
 
         //Going foward
         if (reverseThrottleDown == true) {
