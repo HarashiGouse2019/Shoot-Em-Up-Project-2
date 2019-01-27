@@ -301,6 +301,8 @@ MonoBehaviour:
   pointOfFire: {fileID: 227835909}
   bulletPrefab: {fileID: 2622396011224767487, guid: b96c715ce87dd79438fca4dc2cbfbc9e,
     type: 3}
+  recoilTime: 4
+  enableAutomaticMode: 1
 --- !u!1 &227835908
 GameObject:
   m_ObjectHideFlags: 0
