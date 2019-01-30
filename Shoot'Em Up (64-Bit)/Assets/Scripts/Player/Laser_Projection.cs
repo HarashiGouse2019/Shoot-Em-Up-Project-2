@@ -8,7 +8,7 @@ public class Laser_Projection : MonoBehaviour
     public Rigidbody2D rb; //We use this in able to apply physics to our object
     
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = transform.right * laser_velocity;

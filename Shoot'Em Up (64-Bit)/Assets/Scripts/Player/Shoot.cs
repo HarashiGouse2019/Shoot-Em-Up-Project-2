@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class Shoot : MonoBehaviour
@@ -7,19 +8,19 @@ public class Shoot : MonoBehaviour
     public Transform pointOfFire; //We assign the gameObject that is the child to our Player GameObject
     public GameObject bulletPrefab; //We assign a Prefab to the slot in order to spawn it when we shoot
 
-    [Range(1,15)] public int recoilSpeed;
-
-    public bool enableAutomaticMode;
+    public bool automaticMode;
+    [Range(1, 20)] public int recoilSpeed;
 
     private bool isKeyReleased;
     private IEnumerator coroutine;
 
     void Update()
     {
+        //When the player shots lazers
         if (Input.GetKeyDown(KeyCode.J) || isKeyReleased == true)
         {
             coroutine = Recoil();
-            switch (enableAutomaticMode) {
+            switch (automaticMode) {
                 case false:
                     isKeyReleased = false;
                     Instantiate(bulletPrefab, pointOfFire.position, pointOfFire.rotation); //A bullet will spawn with a set direction based on the player's direction
@@ -34,13 +35,14 @@ public class Shoot : MonoBehaviour
                     break;
             }
         }
-        if (Input.GetKeyUp(KeyCode.J) && enableAutomaticMode == true) StopCoroutine(coroutine);
-    }
-   
+        if (Input.GetKeyUp(KeyCode.J) && automaticMode == true) StopCoroutine(coroutine);
 
+    }
+  
     private void OnTriggerEnter2D(Collider2D hitInfo)
     {
         //Collision Code Goes Here!!! xD
+
     }
 
     private IEnumerator Recoil()

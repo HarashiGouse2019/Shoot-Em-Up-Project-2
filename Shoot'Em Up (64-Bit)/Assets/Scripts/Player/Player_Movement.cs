@@ -5,8 +5,6 @@ using UnityEngine;
 public class Player_Movement : MonoBehaviour
 {
 
-    Vector3 defaultPosition;
-
     //Initializing speed and the speed of rotation
     [HideInInspector] public float speed, rotationSpeed; //Current Speed and Rotation Speed
     public float maxSpeed, maxRotationSpeed; //The Max Speed and the Max Speed of Rotation
@@ -16,7 +14,7 @@ public class Player_Movement : MonoBehaviour
     
 
     private float clockwise; //Reads values 1 and -1; -1 for counter-clockwise, 1 for clockwise rotation
-    private float r; //Rotational controls: It will return the value of the controller or keyboard (-1, 0, 1)
+    private float rotation; //Rotational controls: It will return the value of the controller or keyboard (-1, 0, 1)
 
     private bool ThrottleDown, reverseThrottleDown;
 
@@ -29,30 +27,34 @@ public class Player_Movement : MonoBehaviour
 
     void Update()
     {
-        r = Input.GetAxisRaw("Horizontal"); //The left, right, A, or D keys
-
-        switch (enableRevertControl)
-        {
-            case false:
-                Rotate(-r); //The variable r is used as a parameter for the Rotate function
-                break;
-            case true:
-                Rotate(r);
-                break;
-        }
+        rotation = Input.GetAxisRaw("Horizontal"); //The left, right, A, or D key
     }
 
     void FixedUpdate()
     {
         switch (enableRevertControl) {
             case false:
-                if (Input.GetKey(KeyCode.W)) Throttle();
-                else if (Input.GetKey(KeyCode.S)) ReverseThrottle();
+
+                Rotate(-rotation); //The variable r is used as a parameter for the Rotate function
+
+                if (Input.GetKey(KeyCode.W))
+                    Throttle();
+                else if (Input.GetKey(KeyCode.S))
+                    ReverseThrottle();
+
                 break;
+
             case true:
-                if (Input.GetKey(KeyCode.W)) ReverseThrottle();
-                else if (Input.GetKey(KeyCode.S)) Throttle();
+
+                Rotate(rotation);
+
+                if (Input.GetKey(KeyCode.W))
+                    ReverseThrottle();
+                else if (Input.GetKey(KeyCode.S))
+                    Throttle();
+
                 break;
+
         }
     }
 
@@ -60,7 +62,7 @@ public class Player_Movement : MonoBehaviour
     {
         
 
-        if (Mathf.Abs(rotationSpeed) < Mathf.Abs(maxRotationSpeed) || Input.GetKey(KeyCode.UpArrow))
+        if (Mathf.Abs(rotationSpeed) < Mathf.Abs(maxRotationSpeed))
         {
             rotationSpeed += rateOfRotation; //The rotation speed is not assigned a number (except perhaps 0).
                                              //It will increment by the rateOfRotation times dir (which has values of 1, -1)
@@ -84,7 +86,7 @@ public class Player_Movement : MonoBehaviour
                 break;
         }
 
-        //Going backwards
+        //Going fowards
         if (ThrottleDown == true)
         {
 
@@ -114,7 +116,7 @@ public class Player_Movement : MonoBehaviour
                 break;
         }
 
-        //Going foward
+        //Going backwards
         if (reverseThrottleDown == true) {
 
             if (Mathf.Abs(speed) < Mathf.Abs(maxSpeed))
