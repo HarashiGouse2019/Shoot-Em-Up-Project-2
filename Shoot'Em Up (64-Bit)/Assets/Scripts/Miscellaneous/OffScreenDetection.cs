@@ -27,7 +27,7 @@ public class OffScreenDetection : MonoBehaviour
 
             if (!onScreen)
             {
-                Debug.LogWarning("Player Ship is out of bounds!!!!");
+                Debug.LogWarning("Player Ship got destroy by being out of camera view!!!!");
                 Destroy(Player);
             }
         }
