@@ -5,6 +5,10 @@ using UnityEngine;
 public class Player_Movement : MonoBehaviour
 {
 
+    public GameObject DeathAreaPrefab;
+
+    public static Vector3 originPosition;
+
     //Initializing speed and the speed of rotation
     [HideInInspector] public float speed, rotationSpeed; //Current Speed and Rotation Speed
     public float maxSpeed, maxRotationSpeed; //The Max Speed and the Max Speed of Rotation
@@ -23,6 +27,7 @@ public class Player_Movement : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>(); //Grab the component of the local RigidBody
+        originPosition = gameObject.transform.position;
     }
 
     void Update()
@@ -132,4 +137,24 @@ public class Player_Movement : MonoBehaviour
         }
     } //Propels the player to the opposite direction
 
+
+    private void OnTriggerEnter2D(Collider2D varObject)
+    {
+        if (varObject.tag == "Enemy" || varObject.tag == "Asteroid")
+        {
+            if (gameManager.instance.lives > 0)
+            {
+                gameManager.instance.lives--;
+                gameObject.transform.position = originPosition;
+                Debug.Log("You now have a total of " + gameManager.instance.lives + " lives.");
+            }
+            else
+            {
+                Debug.LogWarning("Player Ship got Destoryed.");
+                Instantiate(DeathAreaPrefab);
+                DeathAreaPrefab.transform.position = gameObject.transform.position;
+                Destroy(gameObject);
+            }
+        }
+    }
 }

@@ -17,7 +17,7 @@ public class Shoot : MonoBehaviour
     void Update()
     {
         //When the player shots lazers
-        if (Input.GetKeyDown(KeyCode.J) || isKeyReleased == true)
+        if (Input.GetKeyDown(KeyCode.Space) || isKeyReleased == true)
         {
             coroutine = Recoil();
             switch (automaticMode) {
