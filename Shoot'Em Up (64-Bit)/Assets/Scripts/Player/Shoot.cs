@@ -35,16 +35,10 @@ public class Shoot : MonoBehaviour
                     break;
             }
         }
-        if (Input.GetKeyUp(KeyCode.J) && automaticMode == true) StopCoroutine(coroutine);
+        if (Input.GetKeyUp(KeyCode.Space) && automaticMode == true) StopCoroutine(coroutine);
 
     }
-  
-    private void OnTriggerEnter2D(Collider2D hitInfo)
-    {
-        //Collision Code Goes Here!!! xD
-
-    }
-
+ 
     private IEnumerator Recoil()
     {
         float value = (float)recoilSpeed;

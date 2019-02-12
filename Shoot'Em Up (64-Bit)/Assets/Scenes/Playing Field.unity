@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: 184456338}
   m_Layer: 0
   m_Name: SpaceShip
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -305,7 +305,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 2622396011224767487, guid: b96c715ce87dd79438fca4dc2cbfbc9e,
     type: 3}
   automaticMode: 0
-  recoilSpeed: 15
+  recoilSpeed: 13
 --- !u!61 &184456338
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -435,7 +435,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 407116283}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 19.6, y: 9.18, z: -0.20721827}
+  m_LocalPosition: {x: 19.95, y: 9.18, z: -0.20721827}
   m_LocalScale: {x: 1.2481672, y: 1.3017888, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

@@ -7,13 +7,6 @@ public class Asteroid : MonoBehaviour
 
     public Vector2 direction;
 
-    public Vector3 originPosition;
-
-    void Awake()
-    {
-        originPosition = this.gameObject.transform.position;
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -22,7 +15,8 @@ public class Asteroid : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Bullet" || other.gameObject.tag == "Player")
+        //If the tag of an object is the bullet
+        if (other.gameObject.tag == "Bullet")
         {
             gameManager.instance.activeEnemies.Remove(this.gameObject);
             Destroy(this.gameObject);
@@ -30,6 +24,15 @@ public class Asteroid : MonoBehaviour
             // Also destroy bullet
             Destroy(other.gameObject);
         }
+
+        //If the tag of an object is the player
+        if (other.gameObject.tag == "Player")
+        {
+            gameManager.instance.activeEnemies.Remove(this.gameObject);
+            Destroy(this.gameObject);
+        }
+
+        //If it is outside of the playing field
         if (other.gameObject.tag == "Board")
         {
             Debug.Log("Asteroid in Playing Field");

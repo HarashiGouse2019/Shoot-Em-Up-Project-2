@@ -16,8 +16,6 @@ public class Player_Movement : MonoBehaviour
 
     public bool enableRevertControl = true;
     
-
-    private float clockwise; //Reads values 1 and -1; -1 for counter-clockwise, 1 for clockwise rotation
     private float rotation; //Rotational controls: It will return the value of the controller or keyboard (-1, 0, 1)
 
     private bool ThrottleDown, reverseThrottleDown;
@@ -53,9 +51,9 @@ public class Player_Movement : MonoBehaviour
 
                 Rotate(rotation);
 
-                if (Input.GetKey(KeyCode.W))
+                if (Input.GetKey(KeyCode.S))
                     ReverseThrottle();
-                else if (Input.GetKey(KeyCode.S))
+                else if (Input.GetKey(KeyCode.W))
                     Throttle();
 
                 break;
@@ -137,8 +135,7 @@ public class Player_Movement : MonoBehaviour
         }
     } //Propels the player to the opposite direction
 
-
-    private void OnTriggerEnter2D(Collider2D varObject)
+    void OnTriggerEnter2D(Collider2D varObject)
     {
         if (varObject.tag == "Enemy" || varObject.tag == "Asteroid")
         {
@@ -146,6 +143,7 @@ public class Player_Movement : MonoBehaviour
             {
                 gameManager.instance.lives--;
                 gameObject.transform.position = originPosition;
+                gameManager.instance.RemoveEnemies();
                 Debug.Log("You now have a total of " + gameManager.instance.lives + " lives.");
             }
             else
@@ -155,6 +153,7 @@ public class Player_Movement : MonoBehaviour
                 DeathAreaPrefab.transform.position = gameObject.transform.position;
                 Destroy(gameObject);
             }
+            gameObject.transform.position = originPosition;
         }
     }
 }
